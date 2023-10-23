@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+		<!-- Start All Pages -->
+		<div class="all-page-title page-breadcrumb">
+			<div class="container text-center">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1>staff</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End All Pages -->
+		
+		<!-- Start staff -->
+		<div class="staff-box">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="heading-title text-center">
+							<h2>staff</h2>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					{% for staff in staff_list %}
+					<div class="col-md-4 col-sm-6">
+						<div class="our-team">
+							<img src="{{staff.image.url}}">
+							<div class="team-content">
+								<h3 class="title">{{staff.name}}</h3>
+								<span class="post">{{staff.title}}</span>
+								<ul class="social">
+									<li><a href="{{staff.facebook_usernam}}"><i class="fa fa-facebook-f"></i></a></li>
+									<li><a href="{{staff.x_username}}"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="{{staff.email}}"><i class="fa fa-google-plus"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+		<!-- End staff -->
+		
+	
+{% endblock content %}
+	

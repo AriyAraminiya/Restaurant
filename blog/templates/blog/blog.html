@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<body>
+	{% comment %} <!-- Start header -->
+	<header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="index.html">
+					<img src="images/logo.png" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-rs-food">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+						<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Pages</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="reservation.html">Reservation</a>
+								<a class="dropdown-item" href="stuff.html">Stuff</a>
+								<a class="dropdown-item" href="gallery.html">Gallery</a>
+							</div>
+						</li>
+						<li class="nav-item active dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="blog.html">blog</a>
+								<a class="dropdown-item" href="blog-details.html">blog Single</a>
+							</div>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header --> {% endcomment %}
+	
+	<!-- Start All Pages -->
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>Blog</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End All Pages -->
+	
+	<!-- Start blog -->
+	<div class="blog-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>Blog</h2>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				
+				{% for blog in blog_list %}
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="blog-box-inner">
+						<div class="blog-img-box">
+							<img class="img-fluid" src="{{blog.image.url}}" style="height:300px" alt="">
+						</div>
+						<div class="blog-detail">
+							<h4>{{blog.title}}</h4>
+							<ul>
+								<li><span>Posted by {{blog.author}}</span></li>
+								<li>|</li>
+								<li><span>At {{blog.create_at| date:"d b Y"}}</span></li>
+							</ul>
+							<p>{{blog.description}} </p>
+							<a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog:blog_detail' blog.id %}">Read More</a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- End blog -->
+
+	<!-- Start Pagination -->
+	{% if blog_list.has_other_pages %}
+	<div class="container mb-3 ">
+		<div class="row">
+			<div class="col d-flex justify-content-center ">
+				<nav aria-label="...">
+					<ul class="pagination">
+						{% if blog_list.has_previous %}
+							<li class="page-item">
+								<a class="page-link" href="?page={{blog_list.previous_page_number}}" tabindex="-1">Previous</a>
+							</li>
+						{% endif %}
+					  	{% for page in blog_list.paginator.page_range %}
+					  		<li class="page-item "><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+					  	{% endfor %}
+					  	{% if blog_list.has_next %}
+					  		<li class="page-item">
+								<a class="page-link" href="?page={{blog_list.next_page_number}}">Next</a>
+					  		</li>
+					  	{% endif %}
+					</ul>
+				  </nav>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+	
+			
+	
+	<!-- End Pagination -->
+	
+	
+</body>
+
+{% endblock content %}
+
+
+
+
